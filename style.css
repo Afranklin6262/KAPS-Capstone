@@ -1,16 +1,22 @@
-<!DOCTYPE css>
-/* Rectangle 1 */
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFDFAC;
+  }
+
+/* Rectangle 1 */
+
+div {
 position: absolute;
 width: 1507px;
 height: 482px;
 left: 194px;
 top: 277px;
+background-color: black;
 }
 
-head {
-    background-color: black;
+body {
+    background-color: #6886C6;
 }
 
 
