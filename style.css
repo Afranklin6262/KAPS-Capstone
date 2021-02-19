@@ -1,9 +1,16 @@
+<!DOCTYPE css>
 /* Rectangle 1 */
 
+body {
 position: absolute;
 width: 1507px;
 height: 482px;
 left: 194px;
 top: 277px;
+}
 
-background: #000000;
+head {
+    background-color: black;
+}
+
+
