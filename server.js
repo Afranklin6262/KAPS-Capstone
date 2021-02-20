@@ -5,9 +5,20 @@ const app = express(); // create application from express
 const mongoose = require('mongoose'); // get mongoose from modules
 const PORT = 8080; // port for express to listen on
 const DB_CONNECTION = "mongodb+srv://likeTheCity:forkNapkin@cluster0.cz1xm.mongodb.net/Kaps?retryWrites=true&w=majority";
+const { auth } = require('express-openid-connect');
 let User = require('./models/user');
 let Ticket = require('./models/ticket');
+const dotenv = require('dotenv'); //require .env file for sensitve info
 //let Ticket = require('./models/ticket');
+
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: 'a long, randomly-generated string stored in env',
+    baseURL: 'http://localhost:8080',
+    clientID: 'Ww7BQWmg47BflDjWlccyCRhY3tWMapv3',
+    issuerBaseURL: 'https://dev-1qgt6cpj.us.auth0.com'
+  };
 
 // connect to the database
 mongoose.connect(DB_CONNECTION, {
@@ -22,9 +33,19 @@ connection.on('error', error => console.log(`Mongo connection error: ${error}`))
 // log on the console once the connection is open
 connection.once('open', () => console.log('MongoDB database connection established succesfully.'));
 
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+  });
+  
 // boilerplate express server
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); // specify that we are using json objects to request and response
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
 
 // define public folder  
 app.use('/' /* route */ , 

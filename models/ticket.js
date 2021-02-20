@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 let Ticket = new mongoose.Schema ({
     date: {
         type: Number,
