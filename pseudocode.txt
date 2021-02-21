@@ -1,0 +1,44 @@
+To Do:
+- inspect Trello for tips on what to do with bug tracker app
+- check how Auth0 handles different user roles
+
+Ticket
+
+What are the properties of a ticket?
+    - priority
+    - dates / timeline
+    - type
+    - who assigned it 
+    - who is working on it
+    - complete/not complete
+    - id number 
+
+What does a ticket need to do?
+    - displayed on dashboard
+    - move to different web pages
+    - update it's properties
+
+How does a ticket interact with the rest of the program?
+    - needs to read user id number
+
+
+user
+
+What are the properties of a user?
+    - username
+    - email address
+    - password
+    - role
+    - id number
+
+What does a user need to do?
+    - post tickets
+    - assign tickets
+    - update ticket
+    - archive tickets
+    - make a username
+    - make a password
+    - update password
+    - tag tickets
+    - login/log out
+  
