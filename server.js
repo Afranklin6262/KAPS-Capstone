@@ -22,9 +22,15 @@ const config = {
 
 // connect to the database
 mongoose.connect(DB_CONNECTION, {
+<<<<<<< Updated upstream
     useNewUrlParser:true,
     useUnifiedTopology:true
 }); // attemp to connect to the database
+=======
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}); // attempt to connect to the database
+>>>>>>> Stashed changes
 
 const connection = mongoose.connection; // we get the connection object from mongoose
 
