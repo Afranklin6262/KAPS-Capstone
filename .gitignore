@@ -1,4 +1,5 @@
 
+
 KAPS-Capstone workspace.code-workspace
 
 # Logs
@@ -106,5 +107,8 @@ dist
 # TernJS port file
 .tern-port
 
-# sensitive information
-.env
+
+kaps.code-workspace
+node_modules/
+
+
