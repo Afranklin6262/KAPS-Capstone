@@ -18,19 +18,13 @@ const config = {
     baseURL: 'http://localhost:8080',
     clientID: 'Ww7BQWmg47BflDjWlccyCRhY3tWMapv3',
     issuerBaseURL: 'https://dev-1qgt6cpj.us.auth0.com'
-  };
+};
 
 // connect to the database
 mongoose.connect(DB_CONNECTION, {
-<<<<<<< Updated upstream
-    useNewUrlParser:true,
-    useUnifiedTopology:true
-}); // attemp to connect to the database
-=======
     useNewUrlParser: true,
     useUnifiedTopology: true
-}); // attempt to connect to the database
->>>>>>> Stashed changes
+}); // attemp to connect to the database
 
 const connection = mongoose.connection; // we get the connection object from mongoose
 
@@ -42,46 +36,53 @@ connection.once('open', () => console.log('MongoDB database connection establish
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
-// req.isAuthenticated is provided from the auth router
-app.get('/', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-  });
-  
+
+
 // boilerplate express server
-app.use(express.urlencoded({extended: true})); 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // specify that we are using json objects to request and response
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
 // define public folder  
-app.use('/' /* route */ , 
-        express.static('public') /* folder to expose */);
+app.use('/' /* route */,
+    express.static('public') /* folder to expose */);
+
+    // req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+    if (req.oidc.isAuthenticated()) {
+        res.redirect("/ticket")
+        //res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+    }
+    
+});
 
 app.get('/user', (request, response) => {
-            User.find((error /* error message if there was an error*/
-                        , result /* result from search */) => {
-                if(error) { // if error is not empty send error message
-                    response.status(400).json({
-                        message: 'Data was not found',
-                        error: error.message
-                    });
-                } else { // if there was no error return result
-                    response.json(result);
-                }
+    User.find((error /* error message if there was an error*/
+        , result /* result from search */) => {
+        if (error) { // if error is not empty send error message
+            response.status(400).json({
+                message: 'Data was not found',
+                error: error.message
             });
-        });       
+        } else { // if there was no error return result
+            response.json(result);
+        }
+    });
+});
 
-        app.post('/user', (request, response) =>  {
-            // new instance of model user
-            let user = new User(request.body);    
-            // insert document into the collection
-            user.save()// attempts to save into the database
-                .then(() => { // successful saving
-                    response.json({ // respond to the client with a success message
-                        success: true // this can be anything
-                    });
-                })
-                .catch(error => { // couldn't be save
+
+app.post('/user', (request, response) => {
+    // new instance of model user
+    let user = new User(request.body);
+    // insert document into the collection
+    user.save()// attempts to save into the database
+        .then(() => { // successful saving
+            response.json({ // respond to the client with a success message
+                success: true // this can be anything
+            });
+        })
+        .catch(error => { // couldn't be save
             console.log(error); // log in the console
             response.status(400).json({ // respond to the client with a failure message
                 success: false, // this can be anything
@@ -96,7 +97,7 @@ app.get('/user/:id', (request, response) => {
     User.findById( // search by id in model User
         id, // id to search for
         (error, result) => { // callback with error or result
-            if(error) { // there is an error
+            if (error) { // there is an error
                 response.status(400); // status = 400
                 response.json({ // Display error message
                     message: 'Data was not found.',
@@ -115,7 +116,7 @@ app.delete('/user/:id', (request, response) => {
     User.findById( // search by id in model User
         id, // id to search for
         (error, result) => { // callback with error or result
-            if(error) { // there is an error
+            if (error) { // there is an error
                 response.status(400); // status = 400
                 response.json({ // Display error message
                     message: 'Data was not found.',
@@ -130,8 +131,8 @@ app.delete('/user/:id', (request, response) => {
 
 app.get('/ticket', (request, response) => {
     Ticket.find((error /* error message if there was an error*/
-                , result /* result from search */) => {
-        if(error) { // if error is not empty send error message
+        , result /* result from search */) => {
+        if (error) { // if error is not empty send error message
             response.status(400).json({
                 message: 'Data was not found',
                 error: error.message
@@ -140,11 +141,11 @@ app.get('/ticket', (request, response) => {
             response.json(result);
         }
     });
-});       
+});
 
-app.post('/ticket', (request, response) =>  {
+app.post('/ticket', (request, response) => {
     // new instance of model ticket
-    let ticket = new Ticket(request.body);    
+    let ticket = new Ticket(request.body);
     // insert document into the collection
     ticket.save()// attempts to save into the database
         .then(() => { // successful saving
@@ -153,50 +154,50 @@ app.post('/ticket', (request, response) =>  {
             });
         })
         .catch(error => { // couldn't be save
-    console.log(error); // log in the console
-    response.status(400).json({ // respond to the client with a failure message
-        success: false, // this can be anything
-        error: error.message
-    });
-});
+            console.log(error); // log in the console
+            response.status(400).json({ // respond to the client with a failure message
+                success: false, // this can be anything
+                error: error.message
+            });
+        });
 });
 
 // /user/:id
 app.get('/ticket/:id', (request, response) => {
-const id = request.params.id; // get parameter id from request
-Ticket.findById( // search by id in model Ticket
-id, // id to search for
-(error, result) => { // callback with error or result
-    if(error) { // there is an error
-        response.status(400); // status = 400
-        response.json({ // Display error message
-            message: 'Data was not found.',
-            error: error.message
-        })
-    } else {
-        response.json(result); // Display document found
-    }
-}
-)
+    const id = request.params.id; // get parameter id from request
+    Ticket.findById( // search by id in model Ticket
+        id, // id to search for
+        (error, result) => { // callback with error or result
+            if (error) { // there is an error
+                response.status(400); // status = 400
+                response.json({ // Display error message
+                    message: 'Data was not found.',
+                    error: error.message
+                })
+            } else {
+                response.json(result); // Display document found
+            }
+        }
+    )
 });
 
 // /user/:id
 app.delete('/ticket/:id', (request, response) => {
-const id = request.params.id; // get parameter id from request
-Ticket.findById( // search by id in model Ticket
-id, // id to search for
-(error, result) => { // callback with error or result
-    if(error) { // there is an error
-        response.status(400); // status = 400
-        response.json({ // Display error message
-            message: 'Data was not found.',
-            error: error.message
-        })
-    } else {
-        response.json(result); // Display document found
-    }
-}
-)
+    const id = request.params.id; // get parameter id from request
+    Ticket.findById( // search by id in model Ticket
+        id, // id to search for
+        (error, result) => { // callback with error or result
+            if (error) { // there is an error
+                response.status(400); // status = 400
+                response.json({ // Display error message
+                    message: 'Data was not found.',
+                    error: error.message
+                })
+            } else {
+                response.json(result); // Display document found
+            }
+        }
+    )
 });
 
 
