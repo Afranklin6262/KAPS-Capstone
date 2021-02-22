@@ -5,11 +5,16 @@ const app = express(); // create application from express
 const mongoose = require('mongoose'); // get mongoose from modules
 const PORT = 8080; // port for express to listen on
 const DB_CONNECTION = "mongodb+srv://likeTheCity:forkNapkin@cluster0.cz1xm.mongodb.net/Kaps?retryWrites=true&w=majority";
+<<<<<<< HEAD
 const { auth } = require('express-openid-connect');
 let User = require('./models/user');
 let Ticket = require('./models/ticket');
 const dotenv = require('dotenv'); //require .env file for sensitve info
 //let Ticket = require('./models/ticket');
+=======
+let User = require('./models//user');
+let Ticket = require('./models/ticket');
+>>>>>>> parent of d27aaf3... finished api
 
 const config = {
     authRequired: false,
@@ -44,6 +49,7 @@ app.use(express.json()); // specify that we are using json objects to request an
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
+<<<<<<< HEAD
 // define public folder  
 app.use('/' /* route */,
     express.static('public') /* folder to expose */);
@@ -56,6 +62,11 @@ app.get('/', (req, res) => {
     }
     
 });
+=======
+// define public folder
+app.use('/' /* route */ , 
+        express.static('public') /* folder to expose */);
+>>>>>>> parent of d27aaf3... finished api
 
 app.get('/user', (request, response) => {
     User.find((error /* error message if there was an error*/
@@ -65,6 +76,7 @@ app.get('/user', (request, response) => {
                 message: 'Data was not found',
                 error: error.message
             });
+<<<<<<< HEAD
         } else { // if there was no error return result
             response.json(result);
         }
@@ -83,6 +95,21 @@ app.post('/user', (request, response) => {
             });
         })
         .catch(error => { // couldn't be save
+=======
+        });       
+
+        app.post('/user', (request, response) =>  {
+            // new instance of model Student
+            let user = new User(request.body);    
+            // insert document into the collection
+            user.save()// attempts to save into the database
+                .then(() => { // successful saving
+                    response.json({ // respond to the client with a success message
+                        success: true // this can be anything
+                    });
+                })
+                .catch(error => { // couldn't be save
+>>>>>>> parent of d27aaf3... finished api
             console.log(error); // log in the console
             response.status(400).json({ // respond to the client with a failure message
                 success: false, // this can be anything
@@ -129,6 +156,7 @@ app.delete('/user/:id', (request, response) => {
     )
 });
 
+<<<<<<< HEAD
 app.get('/ticket', (request, response) => {
     Ticket.find((error /* error message if there was an error*/
         , result /* result from search */) => {
@@ -201,6 +229,8 @@ app.delete('/ticket/:id', (request, response) => {
 });
 
 
+=======
+>>>>>>> parent of d27aaf3... finished api
 // start server
 // last method to execute
 app.listen(PORT, () => console.log(`Express server listening on port ${PORT}`));

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const mongoose = require('mongoose');
 
 let Ticket = new mongoose.Schema ({
@@ -36,3 +37,5 @@ let Ticket = new mongoose.Schema ({
 - id number */
  // allows to require this file
  module.exports = mongoose.model('Ticket' /* Mongoose identifier */, Ticket /* Object Schema*/);
+=======
+>>>>>>> parent of d27aaf3... finished api
