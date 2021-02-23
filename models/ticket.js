@@ -1,9 +1,12 @@
-<<<<<<< HEAD
 const mongoose = require('mongoose');
 
 let Ticket = new mongoose.Schema ({
-    date: {
-        type: Number,
+    dateEntered: {
+        type: String,
+        required: true
+    },
+    dateSolved: {
+        type: String,
         required: true
     },
     type: {
@@ -22,10 +25,6 @@ let Ticket = new mongoose.Schema ({
        type: Boolean,
        required: true
     },
-    complete: {
-        type: Boolean,
-        required: true
-     },
  });
 //What are the properties of a ticket?
 /*- priority
@@ -37,5 +36,3 @@ let Ticket = new mongoose.Schema ({
 - id number */
  // allows to require this file
  module.exports = mongoose.model('Ticket' /* Mongoose identifier */, Ticket /* Object Schema*/);
-=======
->>>>>>> parent of d27aaf3... finished api
