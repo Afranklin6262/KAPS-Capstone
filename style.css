@@ -162,11 +162,11 @@ body {
 
 /* Rectangle 1 */
 
-div {
+div id=unverified {
 position: absolute;
-width: 1507px;
+width: 250px;
 height: 482px;
-left: 194px;
+left: 100px;
 top: 277px;
 background-color: black;
 }
