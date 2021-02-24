@@ -1,8 +1,11 @@
 const express = require('express'); // get express from modules
 const app = express(); // create application from express
 const mongoose = require('mongoose'); // get mongoose from modules
-const PORT = 8080; // port for express to listen on
-
+const cors = require('cors');
+const PORT = process.env.PORT || 8080; // port for express to listen on
+// || makes so that in case that the file .env is not created it defaults to 8080
+// connect to the database
+require('./database');
 const dotenv = require('dotenv'); //require .env file for sensitve info
 //let User = require('./models/user'); <-- this line makes the app crash, not sure why yet
 let Ticket = require('./models/ticket');
@@ -11,6 +14,7 @@ let Ticket = require('./models/ticket');
 
 
 // boilerplate express server
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // specify that we are using json objects to request and response
 
