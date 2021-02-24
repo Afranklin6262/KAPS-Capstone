@@ -1,27 +1,14 @@
-//constants
-
 const express = require('express'); // get express from modules
 const app = express(); // create application from express
 const mongoose = require('mongoose'); // get mongoose from modules
 const PORT = 8080; // port for express to listen on
-const DB_CONNECTION = "mongodb+srv://likeTheCity:forkNapkin@cluster0.cz1xm.mongodb.net/Kaps?retryWrites=true&w=majority";
+
 const dotenv = require('dotenv'); //require .env file for sensitve info
 //let User = require('./models/user'); <-- this line makes the app crash, not sure why yet
 let Ticket = require('./models/ticket');
 
 
-// connect to the database
-mongoose.connect(DB_CONNECTION, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}); // attempt to connect to the database
 
-const connection = mongoose.connection; // we get the connection object from mongoose
-
-// everytime there is an error on mongoose it will log on the console
-connection.on('error', error => console.log(`Mongo connection error: ${error}`));
-// log on the console once the connection is open
-connection.once('open', () => console.log('MongoDB database connection established succesfully.'));
 
 // boilerplate express server
 app.use(express.urlencoded({ extended: true }));
