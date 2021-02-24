@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- include axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>Beer Facts</h1>
+    <input id="tixDesc" type="text">
+    <p id="facts"></p>
+
+    <script>
+        axios({
+                method: 'get',
+                url: 'http://localhost:8080/ticket',
+            })
+            .then(function(response) {
+                console.log(response.data)
+
+                document.getElementById("facts").innerHTML = response.data[0].type;
+            });
+
+        /*
+
+
+// POST request
+axios({
+  method: 'post',
+  url: '/user/12345',
+  data: {
+    firstName: 'Fred',
+    lastName: 'Flintstone',
+    tixDesc: document.getElementById("tixDesc").value
+  }
+});
+            */
+    </script>
+</body>
+
+</html>
