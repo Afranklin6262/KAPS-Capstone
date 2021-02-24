@@ -5,8 +5,9 @@ const DB_CONNECTION = "mongodb+srv://likeTheCity:forkNapkin@cluster0.cz1xm.mongo
 // connect to the database
 mongoose.connect(DB_CONNECTION, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-}); // attempt to connect to the database
+    useUnifiedTopology: true,
+    useFindAndModify: false
+}).then(() => console.log(`MongoDB database connection established - ${DB_CONNECTION}.`)) // if connected // attempt to connect to the database
 
 const connection = mongoose.connection; // we get the connection object from mongoose
 
