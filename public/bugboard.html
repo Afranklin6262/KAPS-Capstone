@@ -6,18 +6,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>bugboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="style.css">
 
     <!--<script src='server.js'></script>-->
+
+    <!-- include axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 
 <body>
-    <form action="/">
+    <form action="localhost:8080/ticket" method="POST">
         <label for="uname">Username:</label><br>
         <input type="text" id="uname" name="uname" value=""><br>
         <label for="fname">First name:</label><br>
@@ -32,664 +34,88 @@
         <input type="submit" value="submit">
 
     </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
 
-    <div>
-        <p>han-tyumi</p>
+    <div class="row">
+            
+        <!-- spacer, dissapears when smaller than 576px -->
+        <div class="d-none d-sm-block col-sm-1"></div>
+        <div class="col-12 col-sm-10">
+            <h3 class="text-center pt-2">
+                <!-- Button that activates the creation of an item -->
+                <button class="btn btn-primary align-middle" onclick="createItem()">
+                    New
+                </button>
+                Students
+            </h3>
+            <table id="contentGrid" class="w-100 border bg-light">
+                <thead class="bg-dark text-light text-center">
+                    <th class="border p-2 text-center">       
+                        Creator
+                    </th>
+                    <th class="border p-2 text-center">       
+                        Solver(s)
+                    </th>
+                    <th class="border p-2 text-center">       
+                        Type
+                    </th>
+                    <th class="border p-2 text-center">       
+                        Priority
+                    </th>
+                    <th class="border p-2 text-center">       
+                        Complete
+                    </th>
+                    <th class="border p-2 text-center">       
+                        Date Entered
+                    </th>
+                    <th class="border p-2 text-center">       
+                        Date Completed
+                    </th>
+                    <th id="gridOptionsHeader" class="border p-2">Options</th>
+                </thead>
+                <tbody id="content">    
+                                       
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
+
+    <input id="tixDesc" type="text">
+    <p id="facts"></p>
+
     <script>
-        axios({​​
+      axios({
+                method: 'get',
+                url: 'http://localhost:8080/ticket',
+            })
+            .then(function(response) {
+                console.log(response.data)
 
-            method: 'get',
+                document.getElementById("facts").innerHTML = response.data[1].dateEntered;
+            });
+        
+            axios({
+                method: 'post',
+                url: 'http://localhost:8080/ticket',
+            })
+            .then(function(response) {
+                console.log(response.data)
 
-            url: 'http://localhost:8080/ticket',
+                document.getElementById("facts").innerHTML = response.data[0].type;
+            });
 
-        }​​)
+            axios({
+  method: 'post',
+  url: 'https://localhost:8080/ticket',
+  data: {
+    creator: 'Fred',
+    solver: 'Flintstone',
+    tixDesc: document.getElementById("tixDesc").value
+  }
+});
 
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
     </script>
 
 </body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-<body>
-    <form action="/">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
-
-        <input type="submit" value="submit">
-
-    </form>
-    >>>>>>> 2c4a0ed51195551d18076997c0a89d53c8dbc2da
-
-    <div>
-        <p>han-tyumi</p>
-    </div>
-    <script>
-        axios({​​
-
-            method: 'get',
-
-            url: 'http://localhost:8080/ticket',
-
-        }​​)
-
-        .then(function(response) {​​
-
-            console.log(response.data);
-
-            document.getElementById("facts").innerHTML = response.data[0].name + "<br><br>" + response.data[0].description + "<br><br>" + response.data[0].brewers_tips;
-        })
-    </script>
-
-</body>
-
 
 </html>
