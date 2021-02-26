@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!--<script src='server.js'></script>-->
+    <script src='server.js'></script>
 
     <!-- include axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -19,17 +19,17 @@
 </head>
 
 <body>
-    <form action="localhost:8080/ticket" method="POST">
-        <label for="uname">Username:</label><br>
-        <input type="text" id="uname" name="uname" value=""><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="buggytype">Bug type:</label><br>
-        <input type="text" id="buggytype" name="buggytype" value=""><br>
-        <label for="buggylevel">Severity:</label><br>
-        <input type="text" id="buggylevel" name="buggylevel" value=""><br>
+    <form action="http://localhost:8080/ticket" method="POST">
+        <label for="creator">Creator:</label><br>
+        <input type="text" id="creator" name="creator" value=""><br>
+        <label for="dateEntered">Date Entered:</label><br>
+        <input type="text" id="dateEntered" name="dateEntered" value=""><br>
+        <label for="dateSolved">Date Solved:</label><br>
+        <input type="text" id="dateSolved" name="dateSolved" value=""><br>
+        <label for="type">Type:</label><br>
+        <input type="text" id="type" name="type" value=""><br>
+        <label for="complete">Completed?:</label><br>
+        <input type="text" id="complete" name="complete" value=""><br>
 
         <input type="submit" value="submit">
 
@@ -42,11 +42,7 @@
         <div class="col-12 col-sm-10">
             <h3 class="text-center pt-2">
                 <!-- Button that activates the creation of an item -->
-                <button class="btn btn-primary align-middle" onclick="createItem()">
-                    New
-                </button>
-                Students
-            </h3>
+                
             <table id="contentGrid" class="w-100 border bg-light">
                 <thead class="bg-dark text-light text-center">
                     <th class="border p-2 text-center">       
