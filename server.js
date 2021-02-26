@@ -22,76 +22,7 @@ app.use(express.json()); // specify that we are using json objects to request an
 app.use('/' /* route */,
     express.static('public') /* folder to expose */);
 
-app.get('/ticket', (request, response) => {
-    Ticket.find((error /* error message if there was an error*/
-        , result /* result from search */) => {
-        if (error) { // if error is not empty send error message
-            response.status(400).json({
-                message: 'Data was not found',
-                error: error.message
-            });
-        } else { // if there was no error return result
-            response.json(result);
-        }
-    });
-});
-
-app.post('/ticket', (request, response) => {
-    // new instance of model ticket
-    let ticket = new Ticket(request.body);
-    // insert document into the collection
-    ticket.save()// attempts to save into the database
-        .then(() => { // successful saving
-            response.json({ // respond to the client with a success message
-                success: true // this can be anything
-            });
-        })
-        .catch(error => { // couldn't be save
-            console.log(error); // log in the console
-            response.status(400).json({ // respond to the client with a failure message
-                success: false, // this can be anything
-                error: error.message
-            });
-        });
-});
-
-
-app.get('/ticket/:id', (request, response) => {
-    const id = request.params.id; // get parameter id from request
-    Ticket.findById( // search by id in model ticket
-        id, // id to search for
-        (error, result) => { // callback with error or result
-            if (error) { // there is an error
-                response.status(400); // status = 400
-                response.json({ // Display error message
-                    message: 'Data was not found.',
-                    error: error.message
-                })
-            } else {
-                response.json(result); // Display document found
-            }
-        }
-    )
-});
-
-
-app.delete('/ticket/:id', (request, response) => {
-    const id = request.params.id; // get parameter id from request
-    Ticket.findById( // search by id in model ticket
-        id, // id to search for
-        (error, result) => { // callback with error or result
-            if (error) { // there is an error
-                response.status(400); // status = 400
-                response.json({ // Display error message
-                    message: 'Data was not found.',
-                    error: error.message
-                })
-            } else {
-                response.json(result); // Display document found
-            }
-        }
-    )
-});
+// ------------ /ticket ----------------
 
 app.get('/ticket', (request, response) => {
     Ticket.find((error /* error message if there was an error*/
@@ -112,24 +43,27 @@ app.post('/ticket', (request, response) => {
     let ticket = new Ticket(request.body);
     // insert document into the collection
     ticket.save()// attempts to save into the database
-        .then(() => { // successful saving
+        .then( newTicket => { // successful saving
             response.json({ // respond to the client with a success message
-                success: true // this can be anything
+                success: true, // this can be anything
+                ticket: newTicket
             });
         })
         .catch(error => { // couldn't be save
             console.log(error); // log in the console
             response.status(400).json({ // respond to the client with a failure message
                 success: false, // this can be anything
+                messsage: 'There was an error trying to create the Ticket.',
                 error: error.message
             });
         });
 });
 
-// /user/:id
+// ------------ /ticket/:id ----------------
+
 app.get('/ticket/:id', (request, response) => {
     const id = request.params.id; // get parameter id from request
-    Ticket.findById( // search by id in model Ticket
+    Ticket.findById( // search by id in model ticket
         id, // id to search for
         (error, result) => { // callback with error or result
             if (error) { // there is an error
@@ -145,25 +79,71 @@ app.get('/ticket/:id', (request, response) => {
     )
 });
 
-// /user/:id
+app.put('/ticket/:id', (request, response) => {
+    const id = request.params.id; // get id form request params
+    const data = request.body; // body is the data we sent from the request
+    // get the document to update
+    Ticket.findByIdAndUpdate(
+        id, // the id to search for
+        data, // the new data for the document
+        { new: true }) // {new: true} tells mongoose to return the new modified student
+        .then((updatedTicket) => {
+            if (!updatedTicket) { // if the updatedStudent doesn't have data, the ticket couldn't be found
+                response.status(400); // status = 400
+                response.json({ // respond to client with an error message
+                    message: 'Data was not found.',
+                    success: false,
+                });
+            } else { // if updatedStudent has data, means that it was found and updated
+                response.json({ // respond to client with a success message and the updatedStudent
+                    success: true,
+                    ticket: updatedTicket
+                });
+            }
+        })
+        .catch(error => { // there was an error while trying to search and update it
+            console.log(error); // log in the console
+            response.status(500); // status = 500
+            response.json({ // respond to the client with a failure message
+                success: false,
+                message: "Could not update user ",
+                error: error.message || 'An error has ocurred'
+            });
+        });
+});
+   
+       
+
+
+
+
 app.delete('/ticket/:id', (request, response) => {
-    const id = request.params.id; // get parameter id from request
-    Ticket.findById( // search by id in model Ticket
-        id, // id to search for
-        (error, result) => { // callback with error or result
-            if (error) { // there is an error
+    const id = request.params.id; // id = request.params.id
+    Ticket.findByIdAndRemove(id)
+        .then((deletedStudent) => {
+            if (!deletedStudent) { // if the deletedStudent doesn't have data, it couldn't be found
                 response.status(400); // status = 400
-                response.json({ // Display error message
+                response.json({ // respond to client with an error message
                     message: 'Data was not found.',
-                    error: error.message
-                })
-            } else {
-                response.json(result); // Display document found
+                    success: false,
+                });
+            } else {// if updatedTicket has data, means that it was found and updated
+                response.json({ // respond to client with a success message 
+                    success: true
+                });
             }
-        }
-    )
-});
-
+        })
+        .catch(error => { // there was an error while trying to search and delete it
+            console.log(error); // log in the console
+            response.status(500); // status = 500
+            response.json({ // respond to the client with a failure message
+                success: false,
+                message: "Could not delete user ",
+                error: error.message || 'An error has ocurred'
+            });
+        });
+    });
+    
 
 // start server
 // last method to execute
