@@ -1,6 +1,6 @@
 # KAPS Bug Tracker
 
-The Kaps Bug Tracker was a group project done by (K)assidy Barnes, (A)lexander Franklin, (Prax) Myers and (S)ydney Ruffin for the Skilled KC Technical Institute. It is a full stack MVP application where users can log any bugs they encounter during software development.
+The Kaps Bug Tracker was a group project done by (K)assidy Barnes, (A)lexander Franklin, (Prax) Myers and (S)ydney Ruffin for the Skilled KC Technical Institute Software Development Program. It is a full stack MVP application where users can log any bugs they encounter during software development.
 
 ## Built With
 
