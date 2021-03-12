@@ -1,13 +1,58 @@
 thead {
     color: #14213D;
-    background-color: #FAC311;
+    background-color: #152F30;
 }
 
 nav {
     color: #14213d;
-    background-color: #FAC311;
+    /*background-color: #FAC311;*/
+    background-color: #152F30;
 }
+
+
 body {
     background: #E5E5E5;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Open-Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+span, th {
+    font-family: 'Proza Libre';
+    font-size: larger;
+    color: white;
+}
+
+h4, label {
+    font-family: 'Proza Libre';
+    font-size: larger;
+    color: #152F30;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #285A51;
+    border: #285A51;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #CE4F5A;
+    border-color: #CE4F5A;
+
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #285A51;
+    border-color: #285A51; 
+}
+
+#newTicket {
+    background-color: #8F4C55;
+    border-color: #8F4C55;
+}
+
+#githubButton {
+    background-color: #8F4C55;
 }

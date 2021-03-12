@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 
+    <!--Font Links-->
+    <link rel="fonts" href="https://fonts.google.com/specimen/Proza+Libre?preview.text_type=custom#standard-styles">
+    <link rel="fonts" href="https://fonts.google.com/specimen/Judson?preview.text_type=custom">
+
     <style>
         /* gives the table the alternate row colors */
-        tr:nth-child(even) {background-color: #f2f2f2;}
+        tr:nth-child(even) {background-color: #EAD7DA;}
     </style>
 </head>
 <body style="background-color: #DDD;" onload="loadMessages()">
@@ -19,7 +23,7 @@
     <nav class="navbar">
         <span class="navbar-brand  mb-0 h1 mr-auto">Kaps Bug Tracker</span>
         <!-- Go to github code -->
-        <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/Afranklin6262/KAPS-Capstone.git" target="_blank"><i class="fab fa-fw fa-github"></i></a>
+        <a id="githubButton"class="btn btn-outline-light btn-social mx-1" href="https://github.com/Afranklin6262/KAPS-Capstone.git" target="_blank"><i class="fab fa-fw fa-github"></i></a>
 
               
     </nav>    
@@ -68,10 +72,10 @@
             <div class="col-12 col-sm-10">
                 <h3 class="text-center pt-2">
                     <!-- Button that activates the creation of an item -->
-                    <button class="btn btn-primary align-middle" onclick="createItem()">
-                        New
+                    <button id ="newTicket" class="btn btn-primary align-middle" onclick="createItem()">
+                        New Ticket
                     </button>
-                    Ticket
+                   
                 </h3>
                 <table id="contentGrid" class="w-100 border bg-light">
                     <thead class="text-center">
