@@ -29,4 +29,4 @@ The Kaps Bug Tracker was a group project done by (K)assidy Barnes, (A)lexander F
 
 ## License
 
-MIT &copy; Kassidy Barnes, Alex Frankline, Prax Myers, Sydney Ruffin
+MIT &copy; Kassidy Barnes, Alex Franklin, Prax Myers, Sydney Ruffin
