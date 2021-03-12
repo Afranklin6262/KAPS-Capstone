@@ -8,6 +8,19 @@ nav {
     background-color: #FAC311;
 }
 body {
-    background: #E5E5E5;
+    /*background: #E5E5E5;*/
     font-family: 'Titillium Web', sans-serif;
+    padding: 0;
+    margin: 0;
+    background: radial-gradient(to right, blue, lightgreen);
+}
+
+span, h4, label, th {
+    font-family: Proza Libre;
+    font-size: larger;
+}
+
+#ticketFont {
+    font-family: Open-Sans;
+    font-size: x-large;
 }
